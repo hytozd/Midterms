@@ -1,0 +1,43 @@
+Questions 1
+Answer: B) UPDATE
+
+Questions 2
+Answer: B) ORDER BY
+
+Question 3
+Answer: SELECT name, insurance_id
+FROM Patient;
+
+Question 4
+Answer: SELECT * FROM Physician
+WHERE position = 'Surgical Attending Physician';
+
+Question 5
+Answer: SELECT COUNT(*) AS total_patients
+FROM Patient;
+
+Question 6
+Answer: SELECT Department.name AS department_name, Physician.name AS primary_physician FROM Department
+JOIN Affiliated_With ON Department.department_id = Affiliated_With.department_id
+JOIN Physician ON Affiliated_With.physician_id = Physician.physician_id
+WHERE Affiliated_With.primary_affiliation = TRUE;
+
+Question 7
+Answer: SELECT physician_id, COUNT(patient_id) AS patient_count FROM Appointment
+GROUP BY physician_id;
+
+Question 8
+Answer: SELECT Appointment.appointment_id, Patient.name AS patient_name, Physician.name AS doctor_name FROM Appointment
+JOIN Patient ON Appointment.patient_id = Patient.patient_id
+JOIN Physician ON Appointment.physician_id = Physician.physician_id;
+
+Question 9
+Answer: SELECT Patient.name FROM Appointment
+JOIN Patient ON Appointment.patient_id = Patient.patient_id
+GROUP BY Patient.name
+HAVING COUNT(Appointment.appointment_id) > 1;
+
+Question 10
+Answer: SELECT Patient.name AS patient_name, Medication.name AS medication_name FROM Prescribes
+JOIN Patient ON Prescribes.patient_id = Patient.patient_id
+JOIN Medication ON Prescribes.medication_id = Medication.medication_id;
