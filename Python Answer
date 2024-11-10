@@ -1,0 +1,48 @@
+students_grades = {}
+
+def print_grades(student_num):
+    if student_num in students_grades:
+        print(f"{student_num} nolu öğrencinin tüm notları = {students_grades[student_num]}")
+    else:
+        print(f"{student_num} nolu öğrencinin notu henuz girilmedi.")
+
+def list_of_students():
+    if students_grades:
+        for student_num, grades in students_grades.items():
+            print(f"{student_num} nolu öğrencinin tüm notları = {grades}")
+    else:
+        print("Henüz öğrenci notu girilmedi.")
+
+def add_grade():
+    while True:
+        user_input = input("Not girişi formati: 'OgrenciNo Not' veya 'q' ile çıkın: ")
+
+        # Çıkış
+        if user_input.lower() == 'q':
+            break
+
+        # Tüm öğrencilerin listesi
+        elif user_input.lower() == 'all':
+            list_of_students()
+
+        # Belirli bir öğrencinin notlarını görüntüleme
+        elif user_input.startswith('print '):
+            student_num = user_input.split()[1]
+            print_grades(student_num)
+
+        # Not girişi
+        else:
+            try:
+                student_num, grade = user_input.split()
+                grade = float(grade)
+
+                if student_num not in students_grades:
+                    students_grades[student_num] = []
+
+                students_grades[student_num].append(grade)
+                print(f"{student_num} nolu öğrencinin tüm notları = {students_grades[student_num]}")
+
+            except ValueError:
+                print("Hatalı giriş.")
+
+add_grade()
